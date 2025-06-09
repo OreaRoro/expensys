@@ -43,7 +43,7 @@ const Navbar = () => {
                   Mes budgets
                 </Link>
                 <Link href={"/dashboard"} className="btn btn-sm mx-4">
-                  Tableai de Bord
+                  Tableau de Bord
                 </Link>
                 <Link href={"/transactions"} className="btn btn-sm">
                   Mes Transactions
