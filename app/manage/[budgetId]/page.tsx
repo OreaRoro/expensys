@@ -12,10 +12,11 @@ import Notification from "../../components/Notification";
 import { Budget } from "@/type";
 import React, { useEffect, useState } from "react";
 import { Send, Trash } from "lucide-react";
-import { redirect } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 
-const Page = ({ params }: { params: { budgetId: string } }) => {
-  const budgetId = params.budgetId;
+const Page = () => {
+  const params = useParams();
+  const budgetId = params.budgetId as string;
   const [budget, setBudget] = useState<Budget>();
   const [description, setDescription] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
