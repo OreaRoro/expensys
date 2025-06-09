@@ -2,7 +2,7 @@
 
 import { useUser } from "@clerk/nextjs";
 import Wrapper from "../components/Wrapper";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { addBudget, getBudgetsByUser } from "../actions";
 import Notification from "../components/Notification";
@@ -14,7 +14,7 @@ const EmojiPicker = dynamic(() => import("emoji-picker-react"), {
   ssr: false, // désactive le rendu côté serveur
 });
 
-const page = () => {
+const Page = () => {
   const { user } = useUser();
   const email = user?.primaryEmailAddress?.emailAddress;
   const [budgetName, setBudgetName] = useState<string>("");
@@ -55,7 +55,7 @@ const page = () => {
     }
   };
 
-  const fetchBudgets = async () => {
+  const fetchBudgets = useCallback(async () => {
     if (email) {
       try {
         const userBudgets = await getBudgetsByUser(email);
@@ -64,7 +64,7 @@ const page = () => {
         setNotification(`Erreur lors de la récupération des budgets! ${error}`);
       }
     }
-  };
+  }, [email]);
 
   useEffect(() => {
     fetchBudgets();
@@ -141,4 +141,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

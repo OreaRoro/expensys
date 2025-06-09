@@ -12,7 +12,7 @@ const Navbar = () => {
     if (email) {
       checkAndAddUser(email);
     }
-  }, [user]);
+  }, [email]);
 
   return (
     <div>
@@ -60,7 +60,7 @@ const Navbar = () => {
                   Se connecter
                 </Link>
                 <Link href={"/sign-up"} className="btn btn-sm mx-4 btn-accent">
-                  S'inscrire
+                  S&rsquo;inscrire
                 </Link>
               </div>
             </div>

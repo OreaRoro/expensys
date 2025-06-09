@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Wrapper from "../components/Wrapper";
 import { useUser } from "@clerk/nextjs";
 import {
@@ -20,14 +20,13 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis,
 } from "recharts";
 import { Budget, Transaction } from "@/type";
 import TransactionItem from "../components/TransactionItem";
 import Link from "next/link";
 import BudgetItem from "../components/BudgetItem";
 
-const page = () => {
+const Page = () => {
   const { user } = useUser();
   const email = user?.primaryEmailAddress?.emailAddress;
   const [totalAmount, setTotlaAmount] = useState<number | null>(null);
@@ -40,7 +39,7 @@ const page = () => {
   );
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setIsLoading(true);
     try {
       if (email) {
@@ -59,13 +58,14 @@ const page = () => {
         setIsLoading(false);
       }
     } catch (error) {
-      console.error("Erreur lors de la récupération des données!");
+      console.error("Erreur lors de la récupération des données!", error);
     }
-  };
+  }, [email]);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     fetchData();
-  }, [user]);
+  }, [fetchData]);
   return (
     <Wrapper>
       {isLoading ? (
@@ -166,4 +166,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -7,7 +7,7 @@ import { getTransactionByEmailAndPeriode } from "../actions";
 import Wrapper from "../components/Wrapper";
 import TransactionItem from "../components/TransactionItem";
 
-const page = () => {
+const Page = () => {
   const { user } = useUser();
   const email = user?.primaryEmailAddress?.emailAddress;
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -31,6 +31,7 @@ const page = () => {
 
   useEffect(() => {
     fetchTransaction("last30");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email]);
   return (
     <Wrapper>
@@ -69,4 +70,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

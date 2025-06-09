@@ -7,7 +7,7 @@ import BudgetItem from "./components/BudgetItem";
 import budgets from "./data";
 
 export default function Home() {
-  const { isLoaded, isSignedIn, user } = useUser();
+  const { isSignedIn } = useUser();
   return (
     <div>
       <Navbar />
@@ -32,7 +32,7 @@ export default function Home() {
                 href={"/sign-up"}
                 className="btn btn-sm md:btn-md btn-accent ml-2"
               >
-                S'inscrire
+                S&apos;inscrire
               </Link>
             </div>
           )}

@@ -14,8 +14,8 @@ import React, { useEffect, useState } from "react";
 import { Send, Trash } from "lucide-react";
 import { redirect } from "next/navigation";
 
-const page = ({ params }: { params: Promise<{ budgetId: string }> }) => {
-  const [budgetId, setBudgetId] = useState<string>("");
+const Page = ({ params }: { params: { budgetId: string } }) => {
+  const budgetId = params.budgetId;
   const [budget, setBudget] = useState<Budget>();
   const [description, setDescription] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
@@ -71,7 +71,7 @@ const page = ({ params }: { params: Promise<{ budgetId: string }> }) => {
       try {
         await deleteBudget(budgetId);
       } catch (error) {
-        console.error("Erreur lors de la suppression du budget!");
+        console.error("Erreur lors de la suppression du budget!", error);
       }
       redirect("/budgets");
     }
@@ -87,19 +87,14 @@ const page = ({ params }: { params: Promise<{ budgetId: string }> }) => {
         fetchBudgetData(budgetId);
         setNotification("Dépense supprimé!");
       } catch (error) {
-        console.error("Erreur lors de la suppression de transaction!");
+        console.error("Erreur lors de la suppression de transaction!", error);
       }
     }
   };
 
   useEffect(() => {
-    const getId = async () => {
-      const resolvedParams = await params;
-      setBudgetId(resolvedParams.budgetId);
-      fetchBudgetData(resolvedParams.budgetId);
-    };
-    getId();
-  }, [params]);
+    fetchBudgetData(budgetId);
+  }, [budgetId]);
 
   return (
     <Wrapper>
@@ -201,4 +196,4 @@ const page = ({ params }: { params: Promise<{ budgetId: string }> }) => {
   );
 };
 
-export default page;
+export default Page;
