@@ -5,9 +5,29 @@ import Link from "next/link.js";
 import Navbar from "./components/Navbar";
 import BudgetItem from "./components/BudgetItem";
 import budgets from "./data";
+import { useCallback, useEffect, useState } from "react";
+import { Budget } from "@/type";
+import { getBudgetsByUser } from "./actions";
 
 export default function Home() {
-  const { isSignedIn } = useUser();
+  const { isSignedIn, user } = useUser();
+  const email = user?.primaryEmailAddress?.emailAddress;
+  const [budgets, setBudgets] = useState<Budget[]>([]);
+
+  const fetchBudgets = useCallback(async () => {
+    if (email) {
+      try {
+        const userBudgets = await getBudgetsByUser(email);
+        setBudgets(userBudgets);
+      } catch (error) {
+        console.error("Erreur lors de la récupértion des budgets: ", error);
+      }
+    }
+  }, [email]);
+
+  useEffect(() => {
+    fetchBudgets();
+  }, [fetchBudgets]);
   return (
     <div>
       <Navbar />
