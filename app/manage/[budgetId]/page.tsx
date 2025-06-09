@@ -50,16 +50,13 @@ const Page = ({ params }: { params: { budgetId: string } }) => {
       if (isNaN(amountNumber) || amountNumber <= 0) {
         throw new Error("Le montant doit être un nombre positif!");
       }
-      const newTransaction = await addTransactionToBudget(
-        budgetId,
-        amountNumber,
-        description
-      );
+      await addTransactionToBudget(budgetId, amountNumber, description);
       setNotification("Transaction ajouter avec succès!");
       fetchBudgetData(budgetId);
       setAmount("");
       setDescription("");
     } catch (error) {
+      console.error("Erreur lors de l'ajout de transaction :", error);
       setNotification("Vous avez dépasser votre budget");
     }
   };

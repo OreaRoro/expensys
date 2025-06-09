@@ -26,12 +26,18 @@ import TransactionItem from "../components/TransactionItem";
 import Link from "next/link";
 import BudgetItem from "../components/BudgetItem";
 
+type BudgetStat = {
+  budgetName: string;
+  totalBudgetAmount: number;
+  totalTransaction: number;
+};
+
 const Page = () => {
   const { user } = useUser();
   const email = user?.primaryEmailAddress?.emailAddress;
   const [totalAmount, setTotlaAmount] = useState<number | null>(null);
   const [totalCount, setTotalCount] = useState<number | null>(null);
-  const [budgetData, setBudgetData] = useState<any[]>([]);
+  const [budgetData, setBudgetData] = useState<BudgetStat[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [reachedBudgetsRatio, setReachedBudgetsRatio] = useState<string | null>(
@@ -62,7 +68,6 @@ const Page = () => {
     }
   }, [email]);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     fetchData();
   }, [fetchData]);
