@@ -7,7 +7,7 @@ const budgets: Budget[] = [
     name: "Alimentation",
     amount: 500,
     emoji: "🍎",
-    transaction: [
+    transactions: [
       {
         id: "t1",
         amount: 50,
@@ -34,7 +34,7 @@ const budgets: Budget[] = [
     name: "Transport",
     amount: 300,
     emoji: "🚗",
-    transaction: [
+    transactions: [
       {
         id: "t3",
         amount: 60,
@@ -61,7 +61,7 @@ const budgets: Budget[] = [
     name: "Loisirs",
     amount: 200,
     emoji: "🎉",
-    transaction: [
+    transactions: [
       {
         id: "t5",
         amount: 40,
@@ -79,7 +79,7 @@ const budgets: Budget[] = [
     name: "Santé",
     amount: 150,
     emoji: "💊",
-    transaction: [
+    transactions: [
       {
         id: "t6",
         amount: 45,
@@ -97,7 +97,7 @@ const budgets: Budget[] = [
     name: "Éducation",
     amount: 400,
     emoji: "📚",
-    transaction: [
+    transactions: [
       {
         id: "t7",
         amount: 100,
@@ -115,7 +115,7 @@ const budgets: Budget[] = [
     name: "Maison",
     amount: 600,
     emoji: "🏠",
-    transaction: [
+    transactions: [
       {
         id: "t8",
         amount: 250,
