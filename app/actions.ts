@@ -111,7 +111,7 @@ export const addTransactionToBudget = async (
         "Le montant total des transactions dépasses le montant du budget."
       );
     }
-    const newTransaction = await prisma.transaction.create({
+    await prisma.transaction.create({
       data: {
         amount,
         description,
